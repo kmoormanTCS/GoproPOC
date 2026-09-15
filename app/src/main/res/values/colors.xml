@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  TCS palette, mirrored from tcs-brand/brand.css :root.
+  Keep these in sync by hand when brand.css changes (scripts/sync-brand.sh
+  only copies the fonts and logo, not these values).
+-->
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Brand palette -->
+    <color name="tcs_orange">#F8991D</color>
+    <color name="tcs_orange_hover">#E08918</color>
+    <color name="tcs_orange_soft">#FFF3E0</color>
+    <color name="tcs_gray">#77787B</color>
+    <color name="tcs_green">#009A44</color>
+    <color name="tcs_green_soft">#E6F4EC</color>
+    <color name="tcs_amber">#D97706</color>
+    <color name="tcs_red">#DC2626</color>
+    <color name="tcs_red_soft">#FEF2F2</color>
+
+    <!-- Functional neutrals -->
+    <color name="tcs_ink">#1F2937</color>
+    <color name="tcs_ink2">#374151</color>
+    <color name="tcs_muted">#64748B</color>
+    <color name="tcs_line">#E5E7EB</color>
+    <color name="tcs_surface">#F8FAFC</color>
+    <color name="tcs_bg">#F3F4F6</color>
+
+    <!-- Header bar gradient (brand.css .topbar) -->
+    <color name="tcs_header_start">#7F8083</color>
+    <color name="tcs_header_end">#6D6E71</color>
+
+    <!-- Scrims -->
+    <color name="scrim_heavy">#B3000000</color>
+    <color name="scrim_medium">#99000000</color>
 </resources>

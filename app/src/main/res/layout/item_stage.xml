@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  One row of the capture checklist. The icon carries the state (hollow ring =
+  not reached, spinner = running, green tick = done, red = failed) so the tech
+  can read progress without parsing text.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingTop="11dp"
+    android:paddingBottom="11dp">
+
+    <FrameLayout
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="15dp">
+
+        <ImageView
+            android:id="@+id/stageIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_pending_circle"
+            android:contentDescription="@null" />
+
+        <ProgressBar
+            android:id="@+id/stageSpinner"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/tcs_orange"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/stageLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.TCS.Body"
+            tools:text="Downloading from camera" />
+
+        <TextView
+            android:id="@+id/stageDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textAppearance="@style/TextAppearance.TCS.Muted"
+            android:visibility="gone"
+            tools:text="4.2 MB at 812 KB/s"
+            tools:visibility="visible" />
+    </LinearLayout>
+</LinearLayout>

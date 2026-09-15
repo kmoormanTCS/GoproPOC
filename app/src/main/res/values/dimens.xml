@@ -1,0 +1,9 @@
+<resources>
+    <!-- brand.css .wrap padding: 22px 24px. -->
+    <dimen name="screen_gutter">20dp</dimen>
+    <dimen name="card_padding">20dp</dimen>
+    <dimen name="card_gap">14dp</dimen>
+
+    <!-- Minimum comfortable target for a gloved thumb outdoors. -->
+    <dimen name="touch_min">52dp</dimen>
+</resources>

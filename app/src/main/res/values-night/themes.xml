@@ -1,7 +1,7 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.TruckCapture" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-    </style>
+<resources>
+    <!--
+      Intentionally identical to the light theme. This app is used outdoors and
+      must not invert with the phone's dark-mode setting; see values/themes.xml.
+    -->
+    <style name="Base.Theme.TruckCapture" parent="Theme.Material3.Light.NoActionBar" />
 </resources>

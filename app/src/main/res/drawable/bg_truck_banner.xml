@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- brand.css .topbar gradient, reused for the truck-context banner where
+     white text is wanted. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="0"
+        android:startColor="@color/tcs_header_start"
+        android:endColor="@color/tcs_header_end"
+        android:type="linear" />
+</shape>

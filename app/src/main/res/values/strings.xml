@@ -1,3 +1,84 @@
 <resources>
-    <string name="app_name">Truck Capture</string>
+    <!-- Launcher label. Deliberately different from the old
+         com.example.truckcapture build's "Truck Capture", so the two are
+         told apart on a tablet that has both installed. Matches the app's
+         own home-screen title. -->
+    <string name="app_name">360 Capture</string>
+    <string name="header_title">Thompson Consulting Services</string>
+    <string name="tcs_logo_desc">Thompson Consulting Services</string>
+
+    <!-- Home -->
+    <string name="home_title">360 Capture</string>
+    <string name="home_subtitle">Scan a truck, shoot its 360, walk away. Uploads finish in the background.</string>
+    <string name="action_scan">Scan Truck QR</string>
+    <string name="action_manual">Enter truck ID manually</string>
+    <string name="queue_card_title">Upload queue</string>
+    <string name="queue_empty">Nothing waiting to upload</string>
+    <string name="action_diagnostics">Diagnostics</string>
+    <string name="action_how_it_works">How this works in the field</string>
+
+    <!-- Upload readiness, shown on Home and Uploads. Phrased as the next
+         action, not as a status, because the tech needs to know what to do. -->
+    <string name="upload_all_clear">All photos uploaded</string>
+    <string name="upload_none_yet">Nothing captured yet</string>
+    <string name="upload_running_wifi">Uploading over Wi-Fi</string>
+    <string name="upload_running_cell">Uploading over cellular</string>
+    <string name="upload_blocked_gopro">Waiting for internet — you\'re on the GoPro\'s Wi-Fi. Turn Wi-Fi off to upload over cellular, or join a network with internet.</string>
+    <string name="upload_blocked_offline">Waiting for internet. Photos are saved and will upload on their own once you\'re back online.</string>
+
+    <!-- Help screen -->
+    <string name="help_title">In the field</string>
+    <string name="help_intro">Photos are saved to this device the moment they\'re taken. Uploading happens by itself in the background — you never have to wait for it, and nothing is lost if you walk away, close the app, or lose signal.</string>
+
+    <string name="help_step_1_title">Join the GoPro\'s Wi-Fi</string>
+    <string name="help_step_1_body">Turn the camera on and connect this device to the GoPro\'s own Wi-Fi network. That network has no internet, which is normal and expected.</string>
+
+    <string name="help_step_2_title">Work truck to truck</string>
+    <string name="help_step_2_body">Scan a truck\'s QR code, check the truck number on screen matches the sticker, then capture. Shoot as many angles as you need, tap Done, and move to the next truck. Stay on the GoPro\'s Wi-Fi the whole time.</string>
+
+    <string name="help_step_3_title">Let the uploads run</string>
+    <string name="help_step_3_body">If this device has cellular data, photos upload as you go — no action needed. If it doesn\'t, they queue up and wait. Twenty or more trucks in the queue is fine.</string>
+
+    <string name="help_step_4_title">When you\'re done</string>
+    <string name="help_step_4_body">If anything is still waiting, turn Wi-Fi off so cellular takes over, or join a Wi-Fi network that has internet. The queue empties on its own. You can close the app — it keeps going.</string>
+
+    <string name="help_footer_title">If something looks wrong</string>
+    <string name="help_footer_body">The Uploads screen lists every photo and its status, and the diagnostics log at the bottom records each scan and capture step. A photo that says PENDING is safe — it just hasn\'t found internet yet.</string>
+
+    <string name="help_copies_title">Where photos are kept</string>
+    <string name="help_copies_body">Every capture is written twice: a working copy that is deleted once it uploads, and your own copy in Documents/TruckCapture, which stays on the device either way.</string>
+
+    <!-- Manual entry -->
+    <string name="manual_title">Enter truck ID</string>
+    <string name="manual_hint">Truck number</string>
+    <string name="manual_help">Use this only when the QR code won\'t scan. Photos taken this way have no GUID and are filed under the truck number alone.</string>
+    <string name="action_start">Start</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_back">Back</string>
+
+    <!-- Scan -->
+    <string name="scan_hint">Point the camera at the truck\'s QR code</string>
+    <string name="scan_permission_needed">Camera permission is needed to scan truck codes.</string>
+    <string name="action_grant_permission">Grant camera access</string>
+
+    <!-- Capture -->
+    <string name="capture_title">Capturing</string>
+    <string name="capture_ready_label">Capture</string>
+    <string name="capture_failed_label">Failed</string>
+    <string name="action_capture">Capture 360 Photo</string>
+    <string name="action_capture_another">Capture Another Angle</string>
+    <string name="action_stop">Stop</string>
+    <string name="action_retry">Try Again</string>
+    <string name="action_done">Done — Next Truck</string>
+
+    <!-- Review -->
+    <string name="review_title">Captured</string>
+    <string name="review_uploading_note">Upload is running in the background. You can keep shooting or move on.</string>
+
+    <!-- Queue -->
+    <string name="queue_title">Uploads</string>
+    <string name="action_clear_queue">Clear Upload Queue</string>
+    <string name="action_clear_queue_confirm">Tap again to confirm</string>
+    <string name="log_title">Diagnostics log</string>
+    <string name="action_clear_log">Clear log</string>
 </resources>

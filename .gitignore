@@ -13,3 +13,16 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Kotlin compiler scratch/error logs — build noise, not source.
+.kotlin/
+
+# TCS brand assets — vendored by scripts/sync-brand.sh, tracked only in tcs-brand.
+/app/src/main/res/font/geometr415_*.ttf
+/app/src/main/res/drawable-nodpi/tcs_logo_horizontal.png
+
+# Signing key and its password. The repo is public: a key here would let anyone
+# sign an APK that Android accepts as a genuine update. Distribute out of band
+# and point keystore.properties at it (keystore.properties.example is tracked).
+/keystore/
+/keystore.properties

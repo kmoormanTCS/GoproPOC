@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Uploads. Also carries the diagnostics log: the GoPro link is still being
+  shaken out in testing, so the log stays reachable on-screen rather than being
+  buried in logcat. It lives below the queue, collapsed out of the main flow but
+  one scroll away.
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tcs_bg"
+    android:clipToPadding="false"
+    android:paddingStart="@dimen/screen_gutter"
+    android:paddingEnd="@dimen/screen_gutter"
+    android:paddingTop="20dp"
+    android:paddingBottom="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.TCS.PageTitle"
+            android:text="@string/queue_title" />
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_orange_accent" />
+
+        <!-- Status roll-up: one pill per non-zero status. -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.TCS.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/summaryText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/card_padding"
+                    android:paddingEnd="@dimen/card_padding"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="10dp"
+                    android:textAppearance="@style/TextAppearance.TCS.Muted"
+                    tools:text="3 pending · 1 uploading · 12 done" />
+
+                <View
+                    android:id="@+id/summaryDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/tcs_line" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/queueList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_queue" />
+
+                <TextView
+                    android:id="@+id/emptyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="26dp"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.TCS.Muted"
+                    android:text="@string/queue_empty"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clearQueueBtn"
+            style="@style/Widget.TCS.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/card_gap"
+            android:text="@string/action_clear_queue"
+            android:textColor="@color/tcs_red"
+            app:strokeColor="@color/tcs_red" />
+
+        <!-- ── Diagnostics ─────────────────────────────────────────────── -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="9dp"
+                android:src="@drawable/ic_bug"
+                app:tint="@color/tcs_muted"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAppearance="@style/TextAppearance.TCS.Badge"
+                android:textColor="@color/tcs_muted"
+                android:text="@string/log_title" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/clearLogBtn"
+                style="@style/Widget.TCS.Button.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="36dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/action_clear_log" />
+        </LinearLayout>
+
+        <!-- Fixed height so the log can't push the queue off screen. -->
+        <ScrollView
+            android:id="@+id/logScroll"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_log_panel"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/logText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.TCS.Mono"
+                android:textSize="11sp"
+                android:lineSpacingExtra="2sp"
+                tools:text="13:12:01  GoPro Wi-Fi acquired." />
+        </ScrollView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

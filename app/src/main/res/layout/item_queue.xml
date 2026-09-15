@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One queued photo: truck, filename, and a brand status pill. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="@dimen/card_padding"
+    android:paddingEnd="@dimen/card_padding"
+    android:paddingTop="13dp"
+    android:paddingBottom="13dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/rowTruck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/geometr415_medium"
+            android:textSize="16sp"
+            android:textColor="@color/tcs_ink"
+            tools:text="7897987" />
+
+        <TextView
+            android:id="@+id/rowFile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:maxLines="1"
+            android:ellipsize="middle"
+            android:textAppearance="@style/TextAppearance.TCS.Mono"
+            android:textColor="@color/tcs_muted"
+            tools:text="4f3a9c21-…_20260915_131204.JPG" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/rowStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:background="@drawable/bg_badge_neutral"
+        android:textAppearance="@style/TextAppearance.TCS.Badge"
+        tools:text="Pending" />
+</LinearLayout>

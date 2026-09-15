@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Home. Designed for one-handed outdoor use: the primary action is a single
+  oversized orange button pinned to the bottom of the screen, inside natural
+  thumb reach. Everything above it is glanceable, not interactive.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tcs_bg"
+    android:paddingStart="@dimen/screen_gutter"
+    android:paddingEnd="@dimen/screen_gutter"
+    android:paddingTop="22dp"
+    android:paddingBottom="22dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.TCS.PageTitle"
+        android:text="@string/home_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/titleAccent"
+        android:layout_width="120dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_orange_accent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:textAppearance="@style/TextAppearance.TCS.Muted"
+        android:lineSpacingExtra="3sp"
+        android:text="@string/home_subtitle"
+        app:layout_constraintTop_toBottomOf="@id/titleAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Queue summary: tappable, opens the Uploads screen. -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/queueCard"
+        style="@style/Widget.TCS.Card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/subtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/card_padding">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="14dp"
+                android:src="@drawable/ic_cloud_upload"
+                app:tint="@color/tcs_gray"
+                android:contentDescription="@null" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.TCS.CardTitle"
+                    android:text="@string/queue_card_title" />
+
+                <TextView
+                    android:id="@+id/queueSummary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textAppearance="@style/TextAppearance.TCS.Muted"
+                    android:text="@string/queue_empty" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_chevron_right"
+                app:tint="@color/tcs_muted"
+                android:contentDescription="@null" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Upload readiness. Phrased as the next action, and only shown when there
+         is something to say — an empty queue needs no advice. -->
+    <LinearLayout
+        android:id="@+id/readinessPanel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_readiness_pill"
+        android:padding="14dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/queueCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/readinessIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="11dp"
+            android:src="@drawable/ic_wifi_off"
+            app:tint="@color/tcs_amber"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/readinessText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:lineSpacingExtra="3sp"
+            android:textAppearance="@style/TextAppearance.TCS.Muted" />
+    </LinearLayout>
+
+    <!-- ── Bottom action stack ──────────────────────────────────────────── -->
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/helpBtn"
+        style="@style/Widget.TCS.Button.Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/action_how_it_works"
+        app:icon="@drawable/ic_help"
+        app:iconTint="@color/tcs_muted"
+        app:iconGravity="textStart"
+        app:layout_constraintBottom_toTopOf="@id/scanBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/scanBtn"
+        style="@style/Widget.TCS.Button.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_scan"
+        app:icon="@drawable/ic_qr_scan"
+        app:layout_constraintBottom_toTopOf="@id/manualBtn"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/manualBtn"
+        style="@style/Widget.TCS.Button.Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/action_manual"
+        app:icon="@drawable/ic_keyboard"
+        app:iconTint="@color/tcs_muted"
+        app:iconGravity="textStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

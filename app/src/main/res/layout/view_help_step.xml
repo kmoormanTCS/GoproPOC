@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  One numbered step of the field guide. Mirrors the numbered section cards the
+  TCS web forms use (forms.css .form-card / .section-num), so the guidance reads
+  as part of the same product family.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <TextView
+        android:id="@+id/stepNum"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="14dp"
+        android:gravity="center"
+        android:background="@drawable/bg_step_num"
+        android:fontFamily="@font/geometr415_black"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        tools:text="1" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/stepTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.TCS.CardTitle"
+            tools:text="Join the GoPro's Wi-Fi" />
+
+        <TextView
+            android:id="@+id/stepBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:lineSpacingExtra="4sp"
+            android:textAppearance="@style/TextAppearance.TCS.Body"
+            android:textColor="@color/tcs_muted"
+            tools:text="Turn the camera on and connect this device to the GoPro's own Wi-Fi network." />
+    </LinearLayout>
+</LinearLayout>

@@ -1,9 +1,174 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.TruckCapture" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <!--
+      TCS light theme. Deliberately light-only: this app is used outdoors in
+      sunlight, where the white-card-on-grey brand surface reads far better than
+      a dark one. values-night mirrors this so the OS setting can't invert it.
+    -->
+    <style name="Base.Theme.TruckCapture" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/tcs_orange</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/tcs_orange_soft</item>
+        <item name="colorOnPrimaryContainer">@color/tcs_amber</item>
+
+        <item name="colorSecondary">@color/tcs_gray</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="colorError">@color/tcs_red</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="colorErrorContainer">@color/tcs_red_soft</item>
+        <item name="colorOnErrorContainer">@color/tcs_red</item>
+
+        <item name="android:colorBackground">@color/tcs_bg</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/tcs_ink</item>
+        <item name="colorSurfaceVariant">@color/tcs_surface</item>
+        <item name="colorOnSurfaceVariant">@color/tcs_muted</item>
+        <item name="colorOutline">@color/tcs_line</item>
+        <item name="colorOutlineVariant">@color/tcs_line</item>
+        <!-- Material 3 tints elevated surfaces with colorPrimary, which turned
+             the white brand cards orange-cream. TCS cards are flat white. -->
+        <item name="elevationOverlayEnabled">false</item>
+
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+
+        <item name="materialButtonStyle">@style/Widget.TCS.Button</item>
+        <item name="textInputStyle">@style/Widget.TCS.TextInputLayout</item>
     </style>
 
     <style name="Theme.TruckCapture" parent="Base.Theme.TruckCapture" />
+
+    <!-- The scanner is full-bleed camera; it gets a transparent system bar. -->
+    <style name="Theme.TruckCapture.Scanner" parent="Base.Theme.TruckCapture">
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+
+    <!-- ── Typography ─────────────────────────────────────────────────── -->
+
+    <!-- brand.css .topbar strong: 900 weight, uppercase, 0.3px tracking. -->
+    <style name="TextAppearance.TCS.HeaderBar" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">@font/geometr415_black</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- brand.css .pagehead h1: 300 weight, 28px, grey. -->
+    <style name="TextAppearance.TCS.PageTitle" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:fontFamily">@font/geometr415_lite</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/tcs_gray</item>
+    </style>
+
+    <style name="TextAppearance.TCS.CardTitle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">@font/geometr415_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/tcs_ink</item>
+    </style>
+
+    <!-- For the truck number: the one value a tech must read at a glance. -->
+    <style name="TextAppearance.TCS.TruckNumber" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">@font/geometr415_black</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:textColor">@color/tcs_ink</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="TextAppearance.TCS.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/tcs_ink2</item>
+    </style>
+
+    <!-- brand.css .muted -->
+    <style name="TextAppearance.TCS.Muted" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/tcs_muted</item>
+    </style>
+
+    <!-- brand.css .badge -->
+    <style name="TextAppearance.TCS.Badge" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:fontFamily">@font/geometr415_medium</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <style name="TextAppearance.TCS.Mono" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/tcs_ink2</item>
+    </style>
+
+    <!-- ── Widgets ────────────────────────────────────────────────────── -->
+
+    <!-- brand.css .btn: orange, 7px radius, bold. -->
+    <style name="Widget.TCS.Button" parent="Widget.Material3.Button">
+        <item name="android:fontFamily">@font/geometr415_medium</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="cornerRadius">7dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="backgroundTint">@color/btn_orange_background</item>
+    </style>
+
+    <!-- The one-handed primary action: full width, tall enough to hit blind. -->
+    <style name="Widget.TCS.Button.Primary" parent="Widget.TCS.Button">
+        <item name="android:fontFamily">@font/geometr415_black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:minHeight">76dp</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="iconSize">28dp</item>
+        <item name="iconPadding">14dp</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+
+    <style name="Widget.TCS.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:fontFamily">@font/geometr415_medium</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">7dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textColor">@color/tcs_ink2</item>
+        <item name="strokeColor">@color/tcs_line</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <!-- Destructive actions (Stop, Clear Queue). -->
+    <style name="Widget.TCS.Button.Danger" parent="Widget.TCS.Button">
+        <item name="backgroundTint">@color/tcs_red</item>
+    </style>
+
+    <style name="Widget.TCS.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:fontFamily">@font/geometr415_medium</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/tcs_muted</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <!-- brand.css .card: white, 10px radius, 1px line, soft shadow. -->
+    <style name="Widget.TCS.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardCornerRadius">10dp</item>
+        <item name="cardElevation">1dp</item>
+        <item name="strokeColor">@color/tcs_line</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="Widget.TCS.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">7dp</item>
+        <item name="boxCornerRadiusTopEnd">7dp</item>
+        <item name="boxCornerRadiusBottomStart">7dp</item>
+        <item name="boxCornerRadiusBottomEnd">7dp</item>
+        <item name="boxStrokeColor">@color/input_stroke</item>
+        <item name="hintTextColor">@color/tcs_muted</item>
+    </style>
 </resources>

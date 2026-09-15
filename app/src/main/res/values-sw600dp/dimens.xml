@@ -1,0 +1,10 @@
+<resources>
+    <!--
+      Tablets. brand.css caps content at `.wrap { max-width: 900px }` and
+      centres it; the equivalent here is a much wider gutter, which keeps cards
+      and buttons from stretching to a full 10" width and stops the primary
+      action drifting out of thumb reach.
+    -->
+    <dimen name="screen_gutter">72dp</dimen>
+    <dimen name="card_padding">24dp</dimen>
+</resources>

@@ -1,118 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Single-activity host. The TCS app bar lives here so every screen in the flow
+  carries the branding without repeating it; ScanFragment hides it to go
+  full-bleed for the camera.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:background="@color/tcs_bg">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Truck Record — Stage 1"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:paddingBottom="12dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Truck ID"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/truckIdField"
+    <!-- The wordmark is grey-on-white, so the bar is white; the orange rule
+         below it is the brand accent (brand.css .pagehead .oline). -->
+    <LinearLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="e.g. 7897987"
-        android:inputType="text"
-        android:textSize="17sp"
-        android:layout_marginBottom="8dp" />
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:elevation="2dp">
 
-    <!-- Opens the camera to scan a truck's QR code into the field above. -->
-    <Button
-        android:id="@+id/scanBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Scan Truck ID"
-        android:textSize="15sp"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Captures the 360 photo, saves locally, and queues a background upload. -->
-    <Button
-        android:id="@+id/captureBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Capture 360 Photo"
-        android:textSize="17sp"
-        android:padding="16dp" />
-
-    <!-- Hard-stops an in-progress capture (e.g. a hung camera download). -->
-    <Button
-        android:id="@+id/stopBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Stop Capture"
-        android:textSize="15sp"
-        android:padding="12dp"
-        android:layout_marginTop="12dp" />
-
-    <!-- Destructive: cancels pending uploads and deletes queued files. -->
-    <Button
-        android:id="@+id/clearBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Clear Upload Queue"
-        android:textSize="15sp"
-        android:padding="12dp"
-        android:layout_marginTop="12dp" />
-
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ready"
-        android:textSize="15sp"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp" />
-
-    <!-- Live view of the upload queue (updates on capture and on resume). -->
-    <TextView
-        android:id="@+id/queue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:textSize="13sp"
-        android:text="Queue: empty"
-        android:paddingBottom="8dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#33000000"
-        android:layout_marginBottom="8dp" />
-
-    <!-- Clears only the on-screen log text (not the upload queue). -->
-    <Button
-        android:id="@+id/clearLogBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Clear Log"
-        android:textSize="14sp"
-        android:padding="8dp"
-        android:layout_marginBottom="8dp" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/log"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="monospace"
-            android:textSize="13sp"
-            android:text="" />
-    </ScrollView>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/screen_gutter"
+            android:paddingEnd="@dimen/screen_gutter"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <!-- Shown on every screen except Home. A tablet in kiosk mode may
+                 have no system Back affordance at all, so the flow needs its
+                 own way out of Uploads, Review and manual entry. -->
+            <ImageButton
+                android:id="@+id/backBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/tcs_ink2"
+                android:contentDescription="@string/action_back"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/tcs_logo_horizontal"
+                android:contentDescription="@string/tcs_logo_desc" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/screenLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.TCS.Badge"
+                android:textColor="@color/tcs_muted"
+                android:text="@string/home_title" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/tcs_orange" />
+    </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navHost"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_capture" />
 </LinearLayout>

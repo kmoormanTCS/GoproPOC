@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Capturing. Three states share this layout:
+    idle     → the big orange Capture button is armed
+    running  → the stage checklist ticks through, Stop is armed
+    failed   → the failed row goes red, an error card explains it, Retry is armed
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/tcs_bg">
+
+    <include
+        android:id="@+id/truckBanner"
+        layout="@layout/view_truck_banner" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/screen_gutter"
+        android:paddingEnd="@dimen/screen_gutter"
+        android:paddingTop="18dp"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Idle prompt. Replaced by the checklist once a capture starts. -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/idleCard"
+                style="@style/Widget.TCS.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="26dp">
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/ic_camera_360"
+                        app:tint="@color/tcs_orange"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/idleHeadline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.TCS.CardTitle"
+                        android:text="Ready to shoot" />
+
+                    <TextView
+                        android:id="@+id/idleHelp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:lineSpacingExtra="3sp"
+                        android:textAppearance="@style/TextAppearance.TCS.Muted"
+                        android:text="Set the GoPro where you want it, then tap Capture. Keep the phone near the camera until the download finishes." />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Live stage checklist. Rows are added in code from CaptureStage. -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/stagesCard"
+                style="@style/Widget.TCS.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/stagesContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/card_padding"
+                    android:paddingEnd="@dimen/card_padding"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Failure explanation, in field language rather than stack traces. -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/errorCard"
+                style="@style/Widget.TCS.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/card_gap"
+                app:cardBackgroundColor="@color/tcs_red_soft"
+                app:strokeColor="@color/tcs_red"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/card_padding">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="14dp"
+                        android:src="@drawable/ic_error_circle"
+                        android:contentDescription="@null" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/errorText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="3sp"
+                            android:textAppearance="@style/TextAppearance.TCS.Body"
+                            android:textColor="@color/tcs_red"
+                            tools:text="Couldn't reach the GoPro. Check the camera is on and the phone is joined to its Wi-Fi." />
+
+                        <!-- Raw exception, for testing. Hidden when the headline
+                             above already names the cause. -->
+                        <TextView
+                            android:id="@+id/errorDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:textAppearance="@style/TextAppearance.TCS.Mono"
+                            android:textSize="11sp"
+                            android:textColor="@color/tcs_red"
+                            android:alpha="0.75"
+                            android:visibility="gone"
+                            tools:text="ConnectException: Failed to connect to /10.5.5.9:80"
+                            tools:visibility="visible" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- ── Bottom action bar ────────────────────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:paddingStart="@dimen/screen_gutter"
+        android:paddingEnd="@dimen/screen_gutter"
+        android:paddingTop="14dp"
+        android:paddingBottom="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/captureBtn"
+            style="@style/Widget.TCS.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_capture"
+            app:icon="@drawable/ic_camera_360" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/stopBtn"
+            style="@style/Widget.TCS.Button.Danger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_stop"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/doneBtn"
+            style="@style/Widget.TCS.Button.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/action_done" />
+    </LinearLayout>
+</LinearLayout>

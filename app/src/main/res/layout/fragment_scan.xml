@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Full-bleed scanner. The app bar is hidden for this screen so the camera fills
+  the display; the close button and hint ride on gradient scrims so they stay
+  readable against any background.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <View
+        android:id="@+id/topScrim"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@drawable/bg_scrim_top"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Grows to the status-bar height at runtime (see ScanFragment). -->
+    <View
+        android:id="@+id/statusSpacer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/closeBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="12dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_close"
+        app:tint="@color/white"
+        android:contentDescription="@string/action_cancel"
+        app:layout_constraintTop_toBottomOf="@id/statusSpacer"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- The scan target. Turns green for a beat on a successful read. -->
+    <FrameLayout
+        android:id="@+id/reticle"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:background="@drawable/bg_reticle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.42" />
+
+    <!-- Shown for ~400ms after a read so the tech sees which truck they got. -->
+    <TextView
+        android:id="@+id/scannedTruck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@drawable/bg_badge_ok"
+        android:fontFamily="@font/geometr415_black"
+        android:textSize="26sp"
+        android:textColor="@color/tcs_green"
+        android:visibility="invisible"
+        tools:text="7897987"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:layout_constraintTop_toBottomOf="@id/reticle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/bottomScrim"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/bg_scrim_bottom"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/scanHint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:fontFamily="@font/geometr415_medium"
+        android:textSize="17sp"
+        android:textColor="@color/white"
+        android:text="@string/scan_hint"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Shown instead of the hint when camera permission is refused. -->
+    <LinearLayout
+        android:id="@+id/permissionPanel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="36dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="@font/geometr415_medium"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="@string/scan_permission_needed" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/grantBtn"
+            style="@style/Widget.TCS.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_grant_permission" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

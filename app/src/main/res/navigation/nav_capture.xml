@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The field flow: Home → Scan → Capture → Review, plus Queue/diagnostics.
+
+  Review's "Capture Another Angle" pops straight back to Capture, so several
+  angles of one truck never require a rescan. "Done" pops all the way to Home
+  and the ViewModel drops the session.
+-->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_capture"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="net.thompsoncs.truckcapture.ui.HomeFragment"
+        android:label="@string/home_title"
+        tools:layout="@layout/fragment_home"
+        xmlns:tools="http://schemas.android.com/tools">
+        <action
+            android:id="@+id/action_home_to_scan"
+            app:destination="@id/scanFragment" />
+        <action
+            android:id="@+id/action_home_to_manual"
+            app:destination="@id/manualEntryFragment" />
+        <action
+            android:id="@+id/action_home_to_queue"
+            app:destination="@id/queueFragment" />
+        <action
+            android:id="@+id/action_home_to_help"
+            app:destination="@id/helpFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scanFragment"
+        android:name="net.thompsoncs.truckcapture.ui.ScanFragment"
+        android:label="@string/action_scan">
+        <!-- Pop the scanner so Back from Capture returns Home, not the camera. -->
+        <action
+            android:id="@+id/action_scan_to_capture"
+            app:destination="@id/captureFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/manualEntryFragment"
+        android:name="net.thompsoncs.truckcapture.ui.ManualEntryFragment"
+        android:label="@string/manual_title">
+        <action
+            android:id="@+id/action_manual_to_capture"
+            app:destination="@id/captureFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/captureFragment"
+        android:name="net.thompsoncs.truckcapture.ui.CaptureFragment"
+        android:label="@string/capture_title">
+        <action
+            android:id="@+id/action_capture_to_review"
+            app:destination="@id/reviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="net.thompsoncs.truckcapture.ui.ReviewFragment"
+        android:label="@string/review_title">
+        <!-- Another angle: back to Capture without re-adding Review to the stack. -->
+        <action
+            android:id="@+id/action_review_to_capture"
+            app:destination="@id/captureFragment"
+            app:popUpTo="@id/captureFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_review_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_review_to_queue"
+            app:destination="@id/queueFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/queueFragment"
+        android:name="net.thompsoncs.truckcapture.ui.QueueFragment"
+        android:label="@string/queue_title" />
+
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="net.thompsoncs.truckcapture.ui.HelpFragment"
+        android:label="@string/help_title" />
+</navigation>

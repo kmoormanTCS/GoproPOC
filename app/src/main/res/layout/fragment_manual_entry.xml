@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Manual entry — the fallback when a QR code is damaged or unreadable. Framed as
+  an exception, not an equal path, because a photo captured this way has no GUID
+  and is filed under the truck number alone.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/tcs_bg"
+    android:paddingStart="@dimen/screen_gutter"
+    android:paddingEnd="@dimen/screen_gutter"
+    android:paddingTop="22dp"
+    android:paddingBottom="22dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.TCS.PageTitle"
+        android:text="@string/manual_title" />
+
+    <View
+        android:layout_width="120dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_orange_accent" />
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.TCS.Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/card_padding">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/truckInputLayout"
+                style="@style/Widget.TCS.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/manual_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/truckInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:imeOptions="actionGo"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineSpacingExtra="3sp"
+                android:textAppearance="@style/TextAppearance.TCS.Muted"
+                android:text="@string/manual_help" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/startBtn"
+        style="@style/Widget.TCS.Button.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_start" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancelBtn"
+        style="@style/Widget.TCS.Button.Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/action_cancel" />
+</LinearLayout>

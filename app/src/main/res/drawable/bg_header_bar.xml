@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- brand.css .topbar: linear-gradient(90deg, #7f8083, #6d6e71). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="0"
+        android:startColor="@color/tcs_header_start"
+        android:endColor="@color/tcs_header_end"
+        android:type="linear" />
+</shape>
