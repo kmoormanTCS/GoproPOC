@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Truck Record — Stage 1"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:paddingBottom="12dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Truck ID"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/truckIdField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="e.g. 7897987"
+        android:inputType="text"
+        android:textSize="17sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Opens the camera to scan a truck's QR code into the field above. -->
+    <Button
+        android:id="@+id/scanBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scan Truck ID"
+        android:textSize="15sp"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Captures the 360 photo, saves locally, and queues a background upload. -->
+    <Button
+        android:id="@+id/captureBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Capture 360 Photo"
+        android:textSize="17sp"
+        android:padding="16dp" />
+
+    <!-- Hard-stops an in-progress capture (e.g. a hung camera download). -->
+    <Button
+        android:id="@+id/stopBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop Capture"
+        android:textSize="15sp"
+        android:padding="12dp"
+        android:layout_marginTop="12dp" />
+
+    <!-- Destructive: cancels pending uploads and deletes queued files. -->
+    <Button
+        android:id="@+id/clearBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear Upload Queue"
+        android:textSize="15sp"
+        android:padding="12dp"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ready"
+        android:textSize="15sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp" />
+
+    <!-- Live view of the upload queue (updates on capture and on resume). -->
+    <TextView
+        android:id="@+id/queue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:textSize="13sp"
+        android:text="Queue: empty"
+        android:paddingBottom="8dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#33000000"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Clears only the on-screen log text (not the upload queue). -->
+    <Button
+        android:id="@+id/clearLogBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear Log"
+        android:textSize="14sp"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textSize="13sp"
+            android:text="" />
+    </ScrollView>
+</LinearLayout>
